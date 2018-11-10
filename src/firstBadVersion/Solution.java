@@ -18,7 +18,8 @@ package firstBadVersion;
 
 public class Solution extends VersionControl {
     public static void main(String[] args) {
-        System.out.println(new Solution().firstBadVersion(10));
+        System.out.println(new Solution().firstBadVersion(2147483647));
+
 
     }
 
@@ -26,32 +27,27 @@ public class Solution extends VersionControl {
         if (isBadVersion(1)) {
             return 1;
         }
-        long s = 1;
-        long f = n;
-        while (true) {
-//            System.out.println(s + "  " + f);
-            long sum = (long) f + s;
-            long midIdx =  (int)Math.round(sum /2.0);
+        int s = 1;
+        int f = n;
+        while (s  < f - 1) {
+            int midIdx =  s + (f - s) / 2;
+            System.out.println(s + "  " + f + " " + midIdx);
 
-            boolean isPrevBadVersion = isBadVersion((int)midIdx - 1);
-
-            boolean isCurBadVersion = isBadVersion((int)midIdx);
-            if (isCurBadVersion && !isPrevBadVersion) {
-                return (int)midIdx;
-            }
+            boolean isCurBadVersion = isBadVersion(midIdx);
 
             if (isCurBadVersion) {
                 f = midIdx;
             } else {
-                s = midIdx;
+                s = midIdx + 1;
             }
         }
+        return isBadVersion(s)? s: f;
     }
 
 }
 
 class VersionControl {
     boolean isBadVersion(int version) {
-        return version >= 9;
+        return version >= 2147483647;
     }
 }
