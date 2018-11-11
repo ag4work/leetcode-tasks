@@ -14,15 +14,17 @@ class Solution {
         int res = 0;
         for (int i = 0; i < nums.length; i++) {
             res ^= nums[i];
+            System.out.println(res);
         }
         return res;
     }
 
     public static void main(String[] args) {
         int[] m;
-        m = new int[] {1,6,1};
-        /*
+//        m = new int[] {1,6,1};
+
         m = new int[] {2,3,4,4,1,2,3};
+        /*
         m = new int[] {3,2,4,4,1,2,3};
         m = new int[] {4,2,3,4,1,2,3};
         m = new int[] {-1,2,3,4,1,2,3};
