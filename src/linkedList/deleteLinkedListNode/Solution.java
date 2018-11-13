@@ -1,6 +1,4 @@
-package deleteLinkedListNode;
-
-import java.util.List;
+package linkedList.deleteLinkedListNode;
 
 /**
  * Definition for singly-linked list.

@@ -1,4 +1,4 @@
-package fizzbuzz;
+package math.fizzbuzz;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package shaffleAnArray;
+package design.shaffleAnArray;
 
 import java.util.Arrays;
 

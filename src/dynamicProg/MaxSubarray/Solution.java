@@ -1,4 +1,4 @@
-package MaxSubarray;
+package dynamicProg.MaxSubarray;
 
 
 public class Solution {
