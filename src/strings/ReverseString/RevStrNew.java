@@ -1,4 +1,4 @@
-package ReverseString;
+package strings.ReverseString;
 
 
 public class RevStrNew {

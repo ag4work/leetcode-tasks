@@ -1,4 +1,4 @@
-package strngs.firstOccurrenceOfSubstr;
+package strings.firstOccurOfSubsr;
 
 class Solution {
     public int strStr(String haystack, String needle) {
