@@ -1,4 +1,4 @@
-package palindrome;
+package strings.palindrome;
 
 public class Solution {
     public static void main(String[] args) {
