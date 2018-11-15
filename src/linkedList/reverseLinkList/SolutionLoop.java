@@ -14,12 +14,16 @@ class Solution {
     }
 
     private ListNode find(ListNode node) {
-        ListNode curr = node;
-        while (curr.next != null) {
-            curr.next.next = curr;
-            curr = curr.next;
+        ListNode curr = node.next;
+        ListNode prev = node;
+        ListNode next;
+        while (curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
         }
-        return curr;
+        return prev;
     }
 
     public static void main(String[] args) {
@@ -28,8 +32,9 @@ class Solution {
         ListNode l2 = new ListNode(2, l3);
         ListNode l1 = new ListNode(1, l2);
 
-        l1.print();
-        ListNode newHead = new Solution().reverseList(l1);
+        ListNode head = l1;
+        head.print();
+        ListNode newHead = new Solution().reverseList(head);
         newHead.print();
     }
 }

@@ -10,6 +10,7 @@ public class ListNode {
     }
 
     void print() {
+        if (this == null) { System.out.println("[]"); return; }
         ListNode cur = this;
         int i = 0;
         do {
