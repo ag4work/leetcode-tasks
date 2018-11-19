@@ -1,53 +1,35 @@
 package trees.BinaryTreeLevelOrderTraversal;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Solution {
+
     public List<List<Integer>> levelOrder(TreeNode root) {
-        if (root == null) return new ArrayList<>();
+        ArrayList<List<Integer>> res = new ArrayList<>();
 
-        List<TreeNode> nodes = new ArrayList<TreeNode>() {{
-            add(root);
-        }};
-        List<Integer> rootInt = new ArrayList<Integer>() {{
-            add(root.val);
-        }};
-        List<List<Integer>> res = new ArrayList<List<Integer>>() {{
-            add(rootInt);
-        }};
+        if (root == null) {
+            return res;
+        }
 
-        do {
-            List<TreeNode> childs = new ArrayList<>();
-            for (TreeNode node : nodes) {
-                //childs.addAll(getDirectChilds(node));
-                safeAdd(childs, node.left);
-                safeAdd(childs, node.right);
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        while (!q.isEmpty()) {
+            List<Integer> levelNodes = new ArrayList<>();
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode child = q.poll();
+                levelNodes.add(child.val);
+                addNonNull(q, child.left);
+                addNonNull(q, child.right);
             }
-            List<Integer> childInts = getChildInt(childs);
-            if (!childInts.isEmpty()) {
-                res.add(childInts);
-            }
-            nodes = childs;
-        } while (nodes.size() > 0);
+            res.add(levelNodes);
+        }
         return res;
     }
 
-    private void safeAdd(List<TreeNode> childs, TreeNode node) {
-        if (node != null) {
-            childs.add(node);
-        }
-    }
-
-    private List<Integer> getChildInt(List<TreeNode> nodes) {
-        List<Integer> list = new ArrayList<>();
-        for (TreeNode node : nodes) {
-            if (node == null) continue;
-            list.add(node.val);
-        }
-        return list;
+    private void addNonNull(Queue<TreeNode> q, TreeNode node) {
+        if (node != null) q.add(node);
     }
 
     public static void main(String[] args) {
