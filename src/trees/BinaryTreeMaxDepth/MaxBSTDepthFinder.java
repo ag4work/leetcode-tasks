@@ -1,4 +1,4 @@
-package BibaryTreeMaxDepth;
+package trees.BinaryTreeMaxDepth;
 
 public class MaxBSTDepthFinder {
 
