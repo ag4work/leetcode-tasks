@@ -3,7 +3,7 @@ package hashtable;
 import java.util.LinkedList;
 import java.util.List;
 
-class MyHashSet {
+public class MyHashSet {
     private static final int N = 1000;
     LinkedList<Integer>[] arr = new LinkedList[N];
     public MyHashSet() {
