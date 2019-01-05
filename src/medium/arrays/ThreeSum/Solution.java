@@ -10,13 +10,24 @@ public class Solution {
         Arrays.sort(m);
         for (int i = 0; i < m.length - 2; i++) {
             if (i > 0 && m[i] == m[i - 1]) continue;
+            if (m[i] ==0 && m[i+1]==0 && m[i+2]==0) {
+                res.add(Arrays.asList(0,0,0));
+                break;
+            }
             if (m[i] > 0) break;
-            for (int j = i + 1; j < m.length - 1; j++) {
-                if (j > i + 1 && m[j] == m[j - 1] ) continue;
-                int foundVal = Arrays.binarySearch(m, j + 1, m.length, -(m[i] + m[j]));
-                if (foundVal >= 0) {
-                    List<Integer> triple = Arrays.asList(m[i], m[j], m[foundVal]);
-                    res.add(triple);
+            int st = i + 1;
+            int end = m.length - 1;
+            while(st < end) {
+                if (m[i] + m[st] + m[end] == 0) {
+                    res.add(Arrays.asList(m[i], m[st], m[end]));
+                    st++;
+                    while(st < m.length && m[st] == m[st - 1]) st++;
+                    end--;
+                    while(end > i && m[end] == m[end + 1]) end--;
+                } else if (m[i] + m[st] + m[end] < 0) {
+                    st++;
+                } else {
+                    end--;
                 }
             }
         }
@@ -26,7 +37,7 @@ public class Solution {
 
     public static void main(String[] args) {
 //        int[] m = new int[]{0,0,0};
-        int[] m = new int[]{-1, 0, 1, 2, -1, -4};
+        int[] m = new int[]{-1, 0, 1,0,0, 2, -1, -4,-2,0,0,2,2};
         List<List<Integer>> lists = new Solution().threeSum(m);
         System.out.println(lists);
     }
