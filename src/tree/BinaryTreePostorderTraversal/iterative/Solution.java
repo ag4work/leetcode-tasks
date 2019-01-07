@@ -1,24 +1,29 @@
-package tree.BinaryTreePostorderTraversal.recursive;
-
+package tree.BinaryTreePostorderTraversal.iterative;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 class Solution {
 
-    public List<Integer> postorderTraversal(TreeNode root) {
-        ArrayList<Integer> res = new ArrayList<>();
-        postOrder(res, root);
+    public List<Integer> postorderTraversal(TreeNode curr) {
+        LinkedList<Integer> res = new LinkedList<>();
+        if (curr == null) return res;
+        Stack<TreeNode> s = new Stack<>();
+        s.push(curr);
+        while( !s.empty() ) {
+            curr = s.pop();
+            if (curr.left != null) {
+                s.push(curr.left);
+            }
+            if (curr.right != null) {
+                s.push(curr.right);
+            }
+            res.addFirst(curr.val);
+        }
         return res;
     }
-
-    private void postOrder(List<Integer> list, TreeNode node) {
-        if (node == null) return;
-        postOrder(list, node.left);
-        postOrder(list, node.right);
-        list.add(node.val);
-    }
-
     public static void main(String[] args) {
         TreeNode root = new TreeNode(1);
         root.left = new TreeNode(2);
@@ -32,8 +37,8 @@ class Solution {
         root.left.left.right = new TreeNode(7);
         root.left.left.right.left = new TreeNode(8);
         root.left.left.right.right = new TreeNode(9);
-
         System.out.println(new Solution().postorderTraversal(root));
+        System.out.println(new Solution().postorderTraversal(null));
     }
 }
 
