@@ -5,27 +5,17 @@ import java.util.*;
 class Solution {
 
 
-    public List<Integer> inorderTraversal(TreeNode root) {
-        if (root == null) return Collections.emptyList();
+    public List<Integer> inorderTraversal(TreeNode curr) {
         ArrayList<Integer> res = new ArrayList<>();
         Stack<TreeNode> s = new Stack<>();
-        s.push(root);
-        Set<TreeNode> processed = new HashSet<>();
-
-
-        while(!s.empty()) {
-            TreeNode node = s.peek();
-            if (node.left != null && !processed.contains(node.left)) {
-                s.push(node.left);
-                continue;
+        while(curr != null || !s.empty() ) {
+            while(curr != null) {
+                curr = s.push(curr);
+                curr = curr.left;
             }
-            node = s.pop();
-            res.add(node.val);
-            processed.add(node);
-
-            if (node.right != null) {
-                s.push(node.right);
-            }
+            curr = s.pop();
+            res.add(curr.val);
+            curr = curr.right;
         }
         return res;
     }
