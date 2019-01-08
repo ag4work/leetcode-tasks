@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public class OnePass {
     public void sortColors(int[] m) {
-        int mid = 1, lo = 0, hi = m.length - 1;
+        int mid = 0, lo = 0, hi = m.length - 1;
         while (mid < hi) {
-            if (m[mid] == 1) {
+            if (m[mid] == 0) {
                 swap(m, lo, mid);
                 lo++;
                 mid++;
@@ -16,6 +16,7 @@ public class OnePass {
             } else {
                 mid++;
             }
+            System.out.println(Arrays.toString(m));
         }
     }
 
@@ -26,8 +27,9 @@ public class OnePass {
     }
 
     public static void main(String[] args) {
-        int[] nums = {1,1,2,2,0,1,0};
-        new Solution().sortColors(nums);
+        int[] nums = {2,0,2,1,1,0};
+        System.out.println(Arrays.toString(nums));
+        new OnePass().sortColors(nums);
         System.out.println(Arrays.toString(nums));
 
     }
