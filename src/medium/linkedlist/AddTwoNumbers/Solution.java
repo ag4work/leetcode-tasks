@@ -8,32 +8,26 @@ public class Solution {
     }
 
     private ListNode sum(ListNode r1, ListNode r2) {
-        ListNode res = null;
-        ListNode prevNode = null;
+        ListNode prevNode = new ListNode(0);
+        ListNode res = prevNode;
         int fromPrevOverflow = 0;
         while (r1 != null && r2 != null) {
             int curSum = r1.val + r2.val + fromPrevOverflow;
             int curDigit = curSum % 10;
             fromPrevOverflow = curSum / 10;
-
-            if (prevNode == null) {
-                prevNode = new ListNode(curDigit);
-                res = prevNode;
-            } else {
-                prevNode.next = new ListNode(curDigit);
-                prevNode = prevNode.next;
-            }
+            prevNode.next = new ListNode(curDigit);
+            prevNode = prevNode.next;
             r1 = r1.next;
             r2 = r2.next;
         }
         ListNode longest = null;
-        if (r1 != null ) {
+        if (r1 != null) {
             longest = r1;
         } else if (r2 != null) {
             longest = r2;
         }
 
-        while (longest !=  null) {
+        while (longest != null) {
             int curSum = fromPrevOverflow + longest.val;
             int curDigit = curSum % 10;
             fromPrevOverflow = curSum / 10;
@@ -46,7 +40,7 @@ public class Solution {
             prevNode.next = new ListNode(1);
         }
 
-        return res;
+        return res.next;
     }
 
     public static void main(String[] args) {
