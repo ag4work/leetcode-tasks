@@ -2,7 +2,9 @@ package easy_random.NumberOfRecentCalls;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 class RecentCounter {
 
@@ -12,12 +14,30 @@ class RecentCounter {
     static boolean printLog = true;
 
     List<Integer> pings = new ArrayList<>();
+    Queue<Integer> q = new LinkedList<>();
 
     public RecentCounter() {
 
     }
 
     public int ping(int t) {
+        while(true) {
+            Integer e = q.peek();
+            if (e == null) {
+                break;
+            }
+            if (e < t - P) {
+                q.remove();
+            } else {
+                break;
+            }
+
+        }
+        q.add(t);
+        return q.size();
+    }
+
+    public int ping1(int t) {
         pings.add(t);
         if (c == 0) {
             c = t;
