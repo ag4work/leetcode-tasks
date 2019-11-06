@@ -1,6 +1,7 @@
 package medium.design.searializeBinTree;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Codec {
 
@@ -18,17 +19,23 @@ public class Codec {
         q.add(root);
         while(!q.isEmpty()) {
             Queue<TreeNode> tmpQ = new LinkedList<>();
+            System.out.println("root: " + root);
+
+            System.out.println("q: " + q.stream().map(r -> r.val).collect(Collectors.toList()));
             while(!q.isEmpty()) {
                 TreeNode node = q.remove();
                 i++;
                 if (i < m.size() && m.get(i) != null) {
                     node.left = new TreeNode(m.get(i));
                     tmpQ.add(node.left);
+                    System.out.println("i = " + i + " Added left: " + node.left.val);
                 }
                 i++;
                 if (i < m.size() && m.get(i) != null) {
                     node.right = new TreeNode(m.get(i));
                     tmpQ.add(node.right);
+                    System.out.println("i = " + i + " Added right: " + node.right.val);
+
                 }
             }
             q = tmpQ;
@@ -60,7 +67,9 @@ public class Codec {
         Codec codec = new Codec();
 //        System.out.println(codec.serialize(root));
 //        codec.deserialize(codec.serialize(root));
-        TreeNode deserialize = codec.deserialize("[5,4,7,3,null,2,null,-1,null,9,null]");
+        String data = "[5,4,7,3,null,2,null,-1,null,9,null]";
+        System.out.println(data);
+        TreeNode deserialize = codec.deserialize(data);
         System.out.println(deserialize);
     }
 
@@ -81,5 +90,14 @@ class TreeNode {
 
     TreeNode(int x) {
         val = x;
+    }
+
+    @Override
+    public String toString() {
+        return "TreeNode{" +
+                "val=" + val +
+                ", left=" + left +
+                ", right=" + right +
+                '}';
     }
 }
